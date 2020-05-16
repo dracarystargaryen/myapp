@@ -1,37 +1,38 @@
 import React from "react";
 
 
+
 class TestAPI extends React.Component { 
   
     constructor(props) { 
         super(props); 
   
         this.state = { 
-            Name: "", 
-            Title: "", 
-            Year: "", 
+            City: "", 
+            Forecast: "", 
+            Condition: "", 
         }; 
     } 
   
     render() { 
   
         return ( 
-            <div className="Art Search"> 
-                <label htmlFor="text">Search for Art</label> 
+            <div className="weather"> 
+                <label htmlFor="text">Search City</label> 
                 <br /> 
                 <div id="location"> 
                     <input onChange={this.changeValue} 
                            type="text" value={this.state.name}/> 
                 </div> 
                 <div className="button"> 
-                    <button onClick={this.getArt}> 
+                    <button onClick={this.getWeather}> 
                       Begin Search  
                     </button> 
                 </div> 
                 <div> 
-                    <h1>Artist: {this.state.name}</h1> 
-                    <h3>Title: {this.state.title}</h3> 
-                    <h3>Year: {this.state.year}</h3> 
+                    <h1>City: {this.state.place}</h1> 
+                    <h3>Forecast: {this.state.temp}</h3> 
+                    <h3>Condition: {this.state.weather}</h3> 
                 </div> 
             </div> 
         ); 
@@ -45,43 +46,21 @@ class TestAPI extends React.Component {
     } 
   
     getArt(){
-        fetch("https://community-rijksmuseum.p.rapidapi.com/%7Bculture%7D/collection?q=Van%20Gogh", {
-        "method": "GET",
-        "headers": {
-        "x-rapidapi-host": "community-rijksmuseum.p.rapidapi.com",
-        "x-rapidapi-key": "28d825216amshcb58cc55e40008ep1e23a2jsn61b3d45a3d52"
-    }
-})
-.then(response => {
-    console.log(response);
-})
-.catch(err => {
-    console.log(err);
-});
-    }
-   
-    SearchArt(){
-        fetch("https://community-rijksmuseum.p.rapidapi.com/%7Bculture%7D/collection?q=Van%20Gogh", {
-        "method": "GET",
-        "headers": {
-        "x-rapidapi-host": "community-rijksmuseum.p.rapidapi.com",
-        "x-rapidapi-key": "28d825216amshcb58cc55e40008ep1e23a2jsn61b3d45a3d52"
-    }
-})
-.then(response => {
-    console.log(response);
-})
-.catch(err => {
-    console.log(err);
-});  
-
-
-    }
-
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=1b84a1ed8cb49dc76bf20377807fe7d8`) 
+            .then(response => response.json()) 
+            .then(data => { 
+                this.setState({ 
+                    place: data.name, 
+                    temp: data.main.temp, 
+                    weather: data.weather[0].main 
+                }); 
+            }); 
+    }  
+    
  
 } 
   
-export default class Home extends React.Component { 
+class Main extends React.Component { 
   
     constructor(props) { 
   
@@ -97,11 +76,19 @@ export default class Home extends React.Component {
         return ( 
             <div className="main"> 
                 <div className="title"> 
-                  Art Searching Index
+                  A Weather Forecast
                 </div> 
                 <hr /> 
                 <TestAPI /> 
             </div> 
         ); 
     } 
-} 
+}
+
+
+
+export default TestAPI;
+
+
+ 
+
