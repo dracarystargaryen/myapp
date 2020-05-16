@@ -8,9 +8,10 @@ class TestAPI extends React.Component {
         super(props); 
   
         this.state = { 
-            City: "", 
-            Forecast: "", 
-            Condition: "", 
+            location: " ",
+            temp: " ", 
+            forecast: " ", 
+            condition: " ", 
         }; 
     } 
   
@@ -18,11 +19,11 @@ class TestAPI extends React.Component {
   
         return ( 
             <div className="weather"> 
-                <label htmlFor="text">Search City</label> 
+                <label htmlFor="text">Search Location</label> 
                 <br /> 
                 <div id="location"> 
                     <input onChange={this.changeValue} 
-                           type="text" value={this.state.name}/> 
+                           type="text" value={this.state.location}/> 
                 </div> 
                 <div className="button"> 
                     <button onClick={this.getWeather}> 
@@ -30,8 +31,8 @@ class TestAPI extends React.Component {
                     </button> 
                 </div> 
                 <div> 
-                    <h1>City: {this.state.place}</h1> 
-                    <h3>Forecast: {this.state.temp}</h3> 
+                    <h1>City: {this.state.city}</h1> 
+                    <h2>Forecast: {this.state.forecast}</h2> 
                     <h3>Condition: {this.state.weather}</h3> 
                 </div> 
             </div> 
@@ -45,20 +46,22 @@ class TestAPI extends React.Component {
         }); 
     } 
   
-    getArt(){
-        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=1b84a1ed8cb49dc76bf20377807fe7d8`) 
+   getWeather = () => { 
+  
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=metric&APPID=1b84a1ed8cb49dc76bf20377807fe7d8`) 
             .then(response => response.json()) 
             .then(data => { 
                 this.setState({ 
-                    place: data.name, 
-                    temp: data.main.temp, 
+                    city: data.name, 
+                    forecast: data.main.temp, 
                     weather: data.weather[0].main 
                 }); 
             }); 
-    }  
-    
- 
+  
+    } 
 } 
+ 
+ 
   
 class Main extends React.Component { 
   
