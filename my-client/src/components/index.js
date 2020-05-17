@@ -5,5 +5,4 @@ export { default as About } from "./About";
 export { default as Contact } from "./Contact";
 export { default as LoginScreen } from "./LoginScreen"
 export { default as TestAPI } from "./TestAPI";
-export { default as Toggle } from "./Toggle";
 export { default as Register } from "./Register";
