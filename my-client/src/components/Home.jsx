@@ -15,12 +15,7 @@ function Home() {
           <div class="col-lg-5">
             <h1 class="font-weight-light">Home</h1>
             <p>
-               This website is designed for individuals who want to enjoy fine arts and post their own artwork.
-               It is designed for people of refined taste and not for those who do not have high-class art appreciation.
-               In other words, this site is NOT for people of lower-class status. 
-               Users are welcome to post their artwork, however opinions will be monitored and users will be 
-               banned if the opinion is deemed unnecessary by the admin. Enjoy the website!
-            </p>
+               Basic weather checking website for anyone wanting a quick weather check. 
           </div>
         </div>
       </div>
